@@ -1,0 +1,12 @@
+
+# jupyter notebook
+.ipynb_checkpoints
+
+
+# pycharm
+__pycache__
+.pytest_cache/*
+.idea/*
+
+# data
+elevators.mat
