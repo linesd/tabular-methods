@@ -58,19 +58,19 @@ class GridWorld:
             raise Exception("Must assign probability and bias terms via the add_transition_probability method.")
 
         self.P = np.zeros((self.num_states,self.num_states,NUM_ACTIONS))
-        for action in range(1, NUM_ACTIONS+1):
+        for action in range(NUM_ACTIONS):
             for state in range(self.num_states):
 
                 # check if state is the fictional end state - self transition
                 if state == self.num_states-1:
-                    self.P[state, state, action-1] = 1
+                    self.P[state, state, action] = 1
                     continue
 
                 # check if the state is the goal state or an obstructed state - transition to end
                 row_col = seq_to_col_row(state, self.num_cols)
                 end_states = np.vstack((self.obs_states, self.goal_state))
                 if any(np.sum(np.abs(end_states-row_col), 1) == 0):
-                    self.P[state, self.num_states-1, action-1] = 1
+                    self.P[state, self.num_states-1, action] = 1
 
                 # else consider stochastic effects of action
                 else:
@@ -84,19 +84,19 @@ class GridWorld:
                         elif dir == 1:
                             prob = (1 - self.p_good_trans)*(1-self.bias)
 
-                        self.P[state, next_state, action-1] += prob
+                        self.P[state, next_state, action] += prob
 
         return self
 
     def _get_direction(self, action, direction):
-        left = [3,4,2,1]
-        right = [4,3,1,2]
+        left = [2,3,1,0]
+        right = [3,2,0,1]
         if direction == 0:
             new_direction = action
         elif direction == -1:
-            new_direction = left[action-1]
+            new_direction = left[action]
         elif direction == 1:
-            new_direction = right[action-1]
+            new_direction = right[action]
         else:
             raise Exception("getDir received an unspecified case")
         return new_direction
@@ -105,11 +105,10 @@ class GridWorld:
         row_change = [-1,1,0,0]
         col_change = [0,0,-1,1]
         row_col = seq_to_col_row(state, self.num_cols)
-        row_col[0,0] += row_change[direction-1]
-        row_col[0,1] += col_change[direction-1]
+        row_col[0,0] += row_change[direction]
+        row_col[0,1] += col_change[direction]
 
         # check for invalid states
-        # TODO: remember to check if min row_col is 1 or 0
         if (np.any(row_col < 0) or
             np.any(row_col[:,0] > self.num_rows-1) or
             np.any(row_col[:,1] > self.num_cols-1) or
