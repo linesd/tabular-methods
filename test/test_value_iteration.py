@@ -2,10 +2,13 @@ import sys
 sys.path.append("..")
 import numpy as np
 from env.grid_world import GridWorld
-from scipy.io import loadmat
+from algorithms.dynamic_programming import value_iteration
 
-def test_gridworld():
-    grid_world = loadmat('../data/test_data/gridworld.mat')['model']
+def test_value_iteration():
+    #load the test data
+    vp = np.load("../data/test_data/test_value_iteration.npy")
+    test_value = vp[:,0].reshape(-1,1)
+    test_pi = vp[:,1].reshape(-1,1)
 
     # specify world parameters
     num_cols = 12
@@ -20,12 +23,12 @@ def test_gridworld():
     gw.add_obstructions(obstructed_states=obstructions,bad_states=bad_states)
     gw.add_rewards(step_reward=-1, goal_reward=10,bad_state_reward=-6)
     gw.add_transition_probability(p_good_transition=0.7, bias=0.5)
-    gw.add_discount(0.9)
+    gw.add_discount(discount=0.9)
     model = gw.create_gridworld()
 
-    # run tests
-    assert np.all(model.R == grid_world['R'][0][0][:,0].reshape(-1,1))
-    assert np.all(model.P[:,:,0] == grid_world['P'][0][0][:,:,0])
-    assert np.all(model.P[:,:,1] == grid_world['P'][0][0][:,:,1])
-    assert np.all(model.P[:,:,2] == grid_world['P'][0][0][:,:,2])
-    assert np.all(model.P[:,:,3] == grid_world['P'][0][0][:,:,3])
+    # solve with value iteration
+    value_function, pi = value_iteration(model, maxiter=100)
+
+    # test value iteration outputs
+    assert np.all(value_function == test_value)
+    assert np.all(pi == test_pi)
