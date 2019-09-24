@@ -4,7 +4,27 @@ import numpy as np
 EPS = 0.001
 
 def value_iteration(model, maxiter=100):
+    """
+    Solves the supplied environment with value iteration.
 
+    Parameters
+    ----------
+    model : python object
+        Holds information about the environment to solve
+        such as the reward structure and the transition dynamics.
+
+    maxiter : int
+        The maximum number of iterations to perform.
+
+    Return
+    ------
+    val_ : numpy array of shape (N, 1)
+        Value function of the environment where N is the number
+        of states in the environment.
+
+    pi : numpy array of shape (N, 1)
+        Optimal policy of the environment.
+    """
     # initialize the value function and policy
     pi = np.ones((model.num_states, 1))
     val_ = np.zeros((model.num_states, 1))
@@ -31,6 +51,27 @@ def value_iteration(model, maxiter=100):
     return val_, pi
 
 def policy_iteration(model, maxiter):
+    """
+    Solves the supplied environment with policy iteration.
+
+    Parameters
+    ----------
+    model : python object
+        Holds information about the environment to solve
+        such as the reward structure and the transition dynamics.
+
+    maxiter : int
+        The maximum number of iterations to perform.
+
+    Return
+    ------
+    val_ : numpy array of shape (N, 1)
+        Value function of the environment where N is the number
+        of states in the environment.
+
+    pi : numpy array of shape (N, 1)
+        Optimal policy of the environment.
+    """
     # initialize the value function and policy
     pi = np.ones((model.num_states, 1))
     val_ = np.zeros((model.num_states, 1))
@@ -59,6 +100,28 @@ def policy_iteration(model, maxiter):
     return val_, pi
 
 def policy_evaluation(model, val_, policy):
+    """
+    Evaluates a given policy.
+
+    Parameters
+    ----------
+    model : python object
+       Holds information about the environment to solve
+       such as the reward structure and the transition dynamics.
+
+    val_ : numpy array of shape (N, 1)
+       Value function of the environment where N is the number
+       of states in the environment.
+
+    policy : numpy array of shape (N, 1)
+       Optimal policy of the environment.
+
+    Return
+    ------
+    val_ : numpy array of shape (N, 1)
+       Value function of the environment where N is the number
+       of states in the environment.
+    """
     loop = True
     while loop:
         # initialize delta
