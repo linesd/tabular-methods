@@ -3,7 +3,7 @@ import matplotlib.patches as patches
 from utils.helper_functions import create_policy_direction_arrays
 import numpy as np
 
-def plot_gridworld(model, value_function, policy):
+def plot_gridworld(model, value_function, policy, path=None):
 
     fig, ax = plt.subplots()
     # colobar max and min
@@ -49,4 +49,6 @@ def plot_gridworld(model, value_function, policy):
     plt.quiver(X, Y, U, V, label="Policy")
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.22),
                fancybox=True, shadow=True, ncol=3)
+    if path is not None:
+        plt.savefig(path, dpi=300)
     plt.show()
