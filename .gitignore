@@ -8,5 +8,5 @@ __pycache__
 .pytest_cache/*
 .idea/*
 
-# data
-elevators.mat
+# dev
+dev.py
