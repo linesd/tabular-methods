@@ -4,11 +4,11 @@ from utils.helper_functions import seq_to_col_row
 
 class GridWorld:
 
-    def __init__(self, num_cols, num_rows, start_state, goal_state):
+    def __init__(self, num_cols, num_rows, start_state, goal_states):
         self.num_cols = num_cols
         self.num_rows = num_rows
         self.start_state = start_state
-        self.goal_state = goal_state
+        self.goal_states = goal_states
         self.obs_states = None
         self.bad_states = None
         self.num_bad_states = 0
@@ -41,12 +41,12 @@ class GridWorld:
         NUM_ACTIONS = 4
         self.num_states = self.num_cols * self.num_rows + 1
         self.start_state_seq = row_col_to_seq(self.start_state, self.num_cols)
-        self.goal_state_seq = row_col_to_seq(self.goal_state, self.num_cols)
+        self.goal_states_seq = row_col_to_seq(self.goal_states, self.num_cols)
 
         # rewards structure
         self.R = self.r_step * np.ones((self.num_states, 1))
         self.R[self.num_states-1] = 0
-        self.R[self.goal_state_seq] = self.r_goal
+        self.R[self.goal_states_seq] = self.r_goal
         for i in range(self.num_bad_states):
             if self.r_bad is None:
                 raise Exception("Bad state specified but no reward is given")
@@ -68,7 +68,7 @@ class GridWorld:
 
                 # check if the state is the goal state or an obstructed state - transition to end
                 row_col = seq_to_col_row(state, self.num_cols)
-                end_states = np.vstack((self.obs_states, self.goal_state))
+                end_states = np.vstack((self.obs_states, self.goal_states))
                 if any(np.sum(np.abs(end_states-row_col), 1) == 0):
                     self.P[state, self.num_states-1, action] = 1
 

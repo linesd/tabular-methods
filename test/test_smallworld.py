@@ -12,7 +12,7 @@ def test_smallworld():
     start_state = np.array([[0,0]])
     goal_state = np.array([[3,3]])
 
-    gw = GridWorld(num_cols, num_rows, start_state=start_state, goal_state=goal_state)
+    gw = GridWorld(num_cols, num_rows, start_state=start_state, goal_states=goal_state)
     gw.add_obstructions(obstacles)
     gw.add_rewards(step_reward=-1, goal_reward=10)
     gw.add_transition_probability(p_good_transition=0.8, bias=0.5)

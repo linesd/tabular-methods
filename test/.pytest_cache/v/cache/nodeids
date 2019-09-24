@@ -1,3 +1,6 @@
 [
-  "test_gridworld.py::test_gridworld"
+  "test_gridworld.py::test_gridworld",
+  "test_policy_iteration.py::test_policy_iteration",
+  "test_smallworld.py::test_smallworld",
+  "test_value_iteration.py::test_value_iteration"
 ]
