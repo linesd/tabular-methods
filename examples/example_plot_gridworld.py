@@ -2,12 +2,10 @@ import sys
 sys.path.append("..")
 import numpy as np
 from env.grid_world import GridWorld
-from algorithms.dynamic_programming import value_iteration
-from algorithms.dynamic_programming import policy_iteration
 from utils.plots import plot_gridworld
 
 ###########################################################
-#      Run value/policy iteration on a grid world         #
+#          Plot a grid world with no solution             #
 ###########################################################
 
 # specify world parameters
@@ -29,12 +27,5 @@ gw.add_transition_probability(p_good_transition=0.7, bias=0.5)
 gw.add_discount(discount=0.9)
 model = gw.create_gridworld()
 
-# solve with value iteration and policy iteration
-vi_value, vi_policy = value_iteration(model, maxiter=100)
-pi_value, pi_policy = policy_iteration(model, maxiter=100)
-
-# plot the results
-path = "../doc/imgs/value_iteration.png"
-plot_gridworld(model, value_function=vi_value, policy=vi_policy, title="Value iteration", path=path)
-path = "../doc/imgs/policy_iteration.png"
-plot_gridworld(model, value_function=pi_value, policy=pi_policy, title="Policy iteration", path=path)
+# plot world
+plot_gridworld(model, title="Test world")
