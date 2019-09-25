@@ -42,7 +42,7 @@ def value_iteration(model, maxiter=100):
             delta = np.max( (delta, np.abs(tmp - val_[state])) )
         # stopping criteria
         if delta <= EPS * (1 - model.gamma) / model.gamma:
-            print("Stopped after %d iterations." %  i)
+            print("Value iteration converged after %d iterations." %  i)
             break
     # compute the policy
     for state in range(model.num_states):
@@ -94,7 +94,7 @@ def policy_iteration(model, maxiter):
 
         # check if stopping criteria satisfied
         if stable_policy:
-            print("Stopped after %d iterations." % i)
+            print("Policy iteration converged after %d iterations." % i)
             break
 
     return val_, pi
