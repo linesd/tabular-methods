@@ -1,9 +1,0 @@
-[
-  "test_cliffworld.py::test_cliffworld",
-  "test_gridworld.py::test_gridworld",
-  "test_policy_iteration.py::test_policy_iteration",
-  "test_qlearning.py::test_qlearning",
-  "test_sarsa.py::test_sarsa",
-  "test_smallworld.py::test_smallworld",
-  "test_value_iteration.py::test_value_iteration"
-]
