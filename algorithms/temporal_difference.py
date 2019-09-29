@@ -181,16 +181,16 @@ def sample_action(Q, state, num_actions, epsilon):
         Number representing the selected action between 0 and num_actions.
     """
     if np.random.random() < epsilon:
-        # action = np.random.randint(0, num_actions)
-        tmp = np.random.random()
-        if tmp <= 0.25:
-            action = 0
-        elif tmp <= 0.5:
-            action = 1
-        elif tmp <= 0.75:
-            action = 2
-        elif tmp <= 1:
-            action = 3
+        action = np.random.randint(0, num_actions)
+        # tmp = np.random.random()
+        # if tmp <= 0.25:
+        #     action = 0
+        # elif tmp <= 0.5:
+        #     action = 1
+        # elif tmp <= 0.75:
+        #     action = 2
+        # elif tmp <= 1:
+        #     action = 3
     else:
         action = np.argmax(Q[state, :])
 
