@@ -62,8 +62,7 @@ def sarsa(model, alpha=0.5, epsilon=0.1, maxiter=100, maxeps=1000):
             # epsilon-greedy action selection
             next_action = sample_action(Q, next_state, model.num_actions, epsilon)
             # Calculate the temporal difference and update Q function
-            delta = alpha * (model.R[state] + model.gamma * Q[next_state, next_action] - Q[state, action])
-            Q[state, action] += delta
+            Q[state, action] += alpha * (model.R[state] + model.gamma * Q[next_state, next_action] - Q[state, action])
             # End episode is state is a terminal state
 
             if np.any(state == model.goal_states_seq):
@@ -182,15 +181,6 @@ def sample_action(Q, state, num_actions, epsilon):
     """
     if np.random.random() < epsilon:
         action = np.random.randint(0, num_actions)
-        # tmp = np.random.random()
-        # if tmp <= 0.25:
-        #     action = 0
-        # elif tmp <= 0.5:
-        #     action = 1
-        # elif tmp <= 0.75:
-        #     action = 2
-        # elif tmp <= 1:
-        #     action = 3
     else:
         action = np.argmax(Q[state, :])
 
