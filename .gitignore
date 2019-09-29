@@ -6,8 +6,9 @@
 # pycharm
 __pycache__
 .pytest_cache/*
+.pytest_cache/v/cache
 .idea/*
 
 # dev
 dev.py
-test_sarsa.py
+
