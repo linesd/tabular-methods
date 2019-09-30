@@ -2,13 +2,12 @@ import sys
 sys.path.append("..")
 import numpy as np
 from env.grid_world import GridWorld
-from algorithms.temporal_difference import sarsa
 from algorithms.temporal_difference import qlearning
 from utils.plots import plot_gridworld
 np.random.seed(1)
 
 ###########################################################
-#            Run Q-Learning on cliff world                #
+#            Run Q-Learning on cliff walk                 #
 ###########################################################
 
 # specify world parameters
@@ -33,9 +32,9 @@ gw.add_transition_probability(p_good_transition=1,
 gw.add_discount(discount=0.9)
 model = gw.create_gridworld()
 
-# solve with value iteration and policy iteration
-q_function, pi = qlearning(model, alpha=0.9, epsilon=0.2, maxiter=100, maxeps=100000)
+# solve with Q-Learning
+q_function, pi, state_counts = qlearning(model, alpha=0.9, epsilon=0.2, maxiter=100, maxeps=10000)
 
 # plot the results
 path = "../doc/imgs/qlearning_cliffworld.png"
-plot_gridworld(model, value_function=q_function, policy=pi, title="Q-Learning", path=path)
+plot_gridworld(model, policy=pi, state_counts=state_counts, title="Q-Learning", path=path)
