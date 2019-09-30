@@ -9,6 +9,12 @@ This repository is a python implementation of tabular-methods for reinforcement 
 Notes:
 - Tested for python >= 3.5
 
+Table of Contents:
+1. [Install](#install)
+2. [Examples](#examples)
+    1. [Create Grid World](#create-grid-world)
+    2. [Dynamic Programming](#dynamic-programming)
+
 ## Install
 ```
 # clone repo
