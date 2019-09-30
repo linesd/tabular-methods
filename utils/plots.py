@@ -3,7 +3,7 @@ import matplotlib.patches as patches
 from utils.helper_functions import create_policy_direction_arrays
 import numpy as np
 
-def plot_gridworld(model, value_function=None, policy=None, title=None, path=None):
+def plot_gridworld(model, value_function=None, policy=None, state_counts=None, title=None, path=None):
     """
     Plots the grid world solution.
 
@@ -26,10 +26,17 @@ def plot_gridworld(model, value_function=None, policy=None, title=None, path=Non
     path : string
         Path to save image. Defaults to None.
     """
+
+    if value_function is not None and state_counts is not None:
+        raise Exception("Must supple either value function or state_counts, not both!")
+
     fig, ax = plt.subplots()
 
     # add features to grid world
-    add_value_function(model, value_function)
+    if value_function is not None:
+        add_value_function(model, value_function, "Value function")
+    elif state_counts is not None:
+        add_value_function(model, state_counts, "State counts")
     add_patches(model, ax)
     add_policy(model, policy)
 
@@ -42,7 +49,7 @@ def plot_gridworld(model, value_function=None, policy=None, title=None, path=Non
 
     plt.show()
 
-def add_value_function(model, value_function):
+def add_value_function(model, value_function, name):
 
     if value_function is not None:
         # colobar max and min
@@ -54,16 +61,16 @@ def add_value_function(model, value_function):
             index = model.obs_states
             val[index[:, 0], index[:, 1]] = -100
         plt.imshow(val, vmin=vmin, vmax=vmax, zorder=0)
-        plt.colorbar(label="Value function")
+        plt.colorbar(label=name)
     else:
         val = np.zeros((model.num_rows, model.num_cols))
         plt.imshow(val, zorder=0)
         plt.yticks(np.arange(-0.5, model.num_rows+0.5, step=1))
         plt.xticks(np.arange(-0.5, model.num_cols+0.5, step=1))
         plt.grid()
-        plt.colorbar(label="Value function")
+        plt.colorbar(label=name)
 
-def add_patches(model, ax, ):
+def add_patches(model, ax):
 
     start = patches.Circle(tuple(np.flip(model.start_state[0])), 0.2, linewidth=1,
                            edgecolor='b', facecolor='b', zorder=1, label="Start")
