@@ -37,10 +37,13 @@ def plot_gridworld(model, value_function=None, policy=None, state_counts=None, t
         add_value_function(model, value_function, "Value function")
     elif state_counts is not None:
         add_value_function(model, state_counts, "State counts")
+    elif value_function is None and state_counts is None:
+        add_value_function(model, value_function, "Value function")
+
     add_patches(model, ax)
     add_policy(model, policy)
 
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.1),
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.12),
                fancybox=True, shadow=True, ncol=3)
     if title is not None:
         plt.title(title, fontdict=None, loc='center')
