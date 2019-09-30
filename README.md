@@ -168,7 +168,7 @@ model = gw.create_gridworld()
 plot_gridworld(model, title="Cliff Walk")
 ```
 <p align="center">
-  <img src="doc/imgs/unsolved_gridworld.png" width=500>
+  <img src="doc/imgs/unsolved_cliffworld.png" width=500>
 </p>
 
 Solve the cliff walk with the on-policy temporal difference control method **SARSA** and plot the results. 
