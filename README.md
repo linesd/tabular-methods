@@ -211,4 +211,4 @@ Testing setup with [pytest](https://docs.pytest.org) (requires installation). Sh
 compatibility or make changes, you can check that original SSGPR functionality remains unaffected by executing 
 `pytest -v` in the **test** directory. You should see the following:
 
-![plot_predicitive_2D](doc/test/pytest_results.png)
+![pytest_results](doc/imgs/pytest_results.png)
