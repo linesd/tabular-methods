@@ -121,6 +121,4 @@ value_function, policy = value_iteration(model, maxiter=100)
 plot_gridworld(model, value_function=value_function, policy=policy, title="Value iteration")
 
 ```
-
-
-<img src="doc/imgs/value_iteration.png" width=300 align=center>
+<img src="doc/imgs/value_iteration.png" width=600 align=middle>
