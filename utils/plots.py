@@ -29,7 +29,7 @@ def plot_gridworld(model, value_function=None, policy=None, title=None, path=Non
     fig, ax = plt.subplots()
 
     # add features to grid world
-    add_value_functions(model, value_function)
+    add_value_function(model, value_function)
     add_patches(model, ax)
     add_policy(model, policy)
 
@@ -38,10 +38,11 @@ def plot_gridworld(model, value_function=None, policy=None, title=None, path=Non
     if title is not None:
         plt.title(title, fontdict=None, loc='center')
     if path is not None:
-        plt.savefig(path, dpi=300)
+        plt.savefig(path, dpi=300, bbox_inches='tight')
+
     plt.show()
 
-def add_value_functions(model, value_function):
+def add_value_function(model, value_function):
 
     if value_function is not None:
         # colobar max and min
@@ -84,19 +85,20 @@ def add_patches(model, ax, ):
 
     if model.bad_states is not None:
         for i in range(model.bad_states.shape[0]):
-            bad = patches.Wedge(tuple(np.flip(model.bad_states[i, :])), 0.2, 20, -20,
-                                linewidth=1, edgecolor='r', facecolor='none', zorder=1,
+            bad = patches.Wedge(tuple(np.flip(model.bad_states[i, :])), 0.2, 40, -40,
+                                linewidth=1, edgecolor='r', facecolor='r', zorder=1,
                                 label="Bad state" if i == 0 else None)
             ax.add_patch(bad)
 
     if model.restart_states is not None:
         for i in range(model.restart_states.shape[0]):
-            restart = patches.Wedge(tuple(np.flip(model.restart_states[i, :])), 0.2, 20, -20,
-                                    linewidth=1, edgecolor='y', facecolor='none', zorder=1,
+            restart = patches.Wedge(tuple(np.flip(model.restart_states[i, :])), 0.2, 40, -40,
+                                    linewidth=1, edgecolor='y', facecolor='y', zorder=1,
                                     label="Restart state" if i == 0 else None)
             ax.add_patch(restart)
 
 def add_policy(model, policy):
+
     if policy is not None:
         # define the gridworld
         X = np.arange(0, model.num_cols, 1)
