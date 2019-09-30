@@ -102,8 +102,9 @@ The created grid world can be viewed with the `plot_gridworld` function in `util
 ```
 plot_gridworld(model, title="Test world")
 ```
-
-![plot_unsolved_gridworld](doc/imgs/unsolved_gridworld.png)
+<p align="center">
+  <img src="doc/imgs/unsolved_gridworld.png" width=500>
+</p>
 
 ### Dynamic programming
 
