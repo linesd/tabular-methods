@@ -36,9 +36,13 @@ def sarsa(model, alpha=0.5, epsilon=0.1, maxiter=100, maxeps=1000):
     pi : numpy array of shape (N, 1)
         Optimal policy for the environment where N is the total
         number of states.
+
+    state_counts : numpy array of shape (N, 1)
+        Counts of the number of times each state is visited
     """
-    # initialize the state-action value function
+    # initialize the state-action value function and the state counts
     Q = np.zeros((model.num_states, model.num_actions))
+    state_counts = np.zeros((model.num_states, 1))
 
     for i in range(maxeps):
 
@@ -68,6 +72,9 @@ def sarsa(model, alpha=0.5, epsilon=0.1, maxiter=100, maxeps=1000):
             if np.any(state == model.goal_states_seq):
                 break
 
+            # count the state visits
+            state_counts[state] += 1
+
             # store the previous state and action
             state = next_state
             action = next_action
@@ -76,7 +83,7 @@ def sarsa(model, alpha=0.5, epsilon=0.1, maxiter=100, maxeps=1000):
     q = np.max(Q, axis=1).reshape(-1,1)
     pi = np.argmax(Q, axis=1).reshape(-1,1)
 
-    return q, pi
+    return q, pi, state_counts
 
 def qlearning(model, alpha=0.5, epsilon=0.1, maxiter=100, maxeps=1000):
     """
@@ -114,9 +121,13 @@ def qlearning(model, alpha=0.5, epsilon=0.1, maxiter=100, maxeps=1000):
     pi : numpy array of shape (N, 1)
         Optimal policy for the environment where N is the total
         number of states.
+
+    state_counts : numpy array of shape (N, 1)
+        Counts of the number of times each state is visited
     """
-    # initialize the state-action value function
+    # initialize the state-action value function and the state counts
     Q = np.zeros((model.num_states, model.num_actions))
+    state_counts = np.zeros((model.num_states, 1))
 
     for i in range(maxeps):
 
@@ -141,6 +152,10 @@ def qlearning(model, alpha=0.5, epsilon=0.1, maxiter=100, maxeps=1000):
 
             # Calculate the temporal difference and update Q function
             Q[state, action] += alpha * (model.R[state] + model.gamma * np.max(Q[next_state, :]) - Q[state, action])
+
+            # count the state visits
+            state_counts[state] += 1
+
             #Store the previous state
             state = next_state
             # End episode is state is a terminal state
@@ -151,7 +166,7 @@ def qlearning(model, alpha=0.5, epsilon=0.1, maxiter=100, maxeps=1000):
     q = np.max(Q, axis=1).reshape(-1,1)
     pi = np.argmax(Q, axis=1).reshape(-1,1)
 
-    return q, pi
+    return q, pi, state_counts
 
 def sample_action(Q, state, num_actions, epsilon):
     """
