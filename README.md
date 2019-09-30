@@ -184,7 +184,7 @@ Solve the cliff walk with the off-policy temporal difference control method **Q-
 
 ```
 # solve with Q-Learning
-ql_q_function, ql_pi, ql_state_counts = qlearning(model, alpha=0.9, epsilon=0.2, maxiter=100, maxeps=10000)
+q_function, pi, state_counts = qlearning(model, alpha=0.9, epsilon=0.2, maxiter=100, maxeps=10000)
 
 # plot the results
 plot_gridworld(model, policy=pi, state_counts=state_counts, title="Q-Learning", path=path)
@@ -192,3 +192,7 @@ plot_gridworld(model, policy=pi, state_counts=state_counts, title="Q-Learning", 
 <p align="center">
   <img src="doc/imgs/qlearning_cliffworld.png" width=500>
 </p>
+
+From the plots, it is clear that the SARSA agent learns a conservative solution to the cliff walk and shows
+preference for the path furthest away from the cliff edge. In contrast, the Q-Learning agent learns the riskier
+path along the cliff edge. 
