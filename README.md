@@ -21,7 +21,7 @@ algorithms are implemented:
 1. [Install](#install)
 2. [Examples](#examples)
     1. [Create Grid World](#create-grid-world)
-    2. [Dynamic Programming (value iteration & policy iteration)](#dynamic-programming)
+    2. [Dynamic Programming (Value Iteration & Policy Iteration)](#dynamic-programming)
     3. [Temporal Difference (SARSA and Q-Learning)](#temporal-difference)
 3. [Test](#testing)
 
