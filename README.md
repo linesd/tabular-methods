@@ -15,6 +15,7 @@ Table of Contents:
     1. [Create Grid World](#create-grid-world)
     2. [Dynamic Programming (value iteration & policy iteration)](#dynamic-programming)
     3. [Temporal Difference (SARSA and Q-Learning)](#temporal-difference)
+3. [Test](#testing)
 
 ## Install
 ```
@@ -162,12 +163,19 @@ gw.add_transition_probability(p_good_transition=1,
                               bias=0)
 gw.add_discount(discount=0.9)
 model = gw.create_gridworld()
+
+# plot the world
+plot_gridworld(model, title="Cliff Walk")
 ```
+<p align="center">
+  <img src="doc/imgs/unsolved_gridworld.png.png" width=500>
+</p>
 
 Solve the cliff walk with the on-policy temporal difference control method **SARSA** and plot the results. 
 SARSA returns three values, the q_function, the policy and the state_counts. Here the policy and the 
-state_counts are passed to `plot_gridworld` so that the path most frequently used by the agent is show. 
-However, the q_function can be passed instead to show the q_function values on the plot.  
+state_counts are passed to `plot_gridworld` so that the path most frequently used by the agent is shown. 
+However, the q_function can be passed instead to show the q_function values on the plot as was done with
+the dynamic programming examples.  
 
 ```
 # solve with SARSA
@@ -196,3 +204,11 @@ plot_gridworld(model, policy=pi, state_counts=state_counts, title="Q-Learning", 
 From the plots, it is clear that the SARSA agent learns a conservative solution to the cliff walk and shows
 preference for the path furthest away from the cliff edge. In contrast, the Q-Learning agent learns the riskier
 path along the cliff edge. 
+
+## Testing
+
+Testing setup with [pytest](https://docs.pytest.org) (requires installation). Should you want to check version 
+compatibility or make changes, you can check that original SSGPR functionality remains unaffected by executing 
+`pytest -v` in the **test** directory. You should see the following:
+
+![plot_predicitive_2D](doc/test/pytest_results.png)
