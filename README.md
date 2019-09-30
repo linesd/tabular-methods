@@ -4,7 +4,15 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/YannDubs/disentangling-vae/blob/master/LICENSE) 
 [![Python 3.5+](https://img.shields.io/badge/python-3.5+-blue.svg)](https://www.python.org/downloads/release/python-360/)
 
-This repository is a python implementation of tabular-methods for reinforcement learning with focus on dynamic programming and temporal difference methods.
+This repository is a python implementation of tabular-methods for reinforcement learning focusing on the dynamic 
+programming and temporal difference methods presented in 
+[Reinforcement Learning, An Introduction](http://incompleteideas.net/book/the-book-2nd.html). The following 
+algorithms are implemented:
+
+1. **Value Iteration:** see page 67 of [Reinforcement Learning, An Introduction](http://incompleteideas.net/book/bookdraft2017nov5.pdf)
+2. **Policy Iteration:** see page 64 of [Reinforcement Learning, An Introduction](http://incompleteideas.net/book/bookdraft2017nov5.pdf)
+3. **SARSA, on-policy TD control:** see page 105 of [Reinforcement Learning, An Introduction](http://incompleteideas.net/book/bookdraft2017nov5.pdf)
+4. **Q-Learning off-policy TD control:** see page 107 of [Reinforcement Learning, An Introduction](http://incompleteideas.net/book/bookdraft2017nov5.pdf)
 
 Notes:
 - Tested for python >= 3.5
