@@ -38,7 +38,7 @@ def test_qlearning():
     model = gw.create_gridworld()
 
     # solve with sarsa
-    q, pi = qlearning(model, alpha=0.8, epsilon=0.1, maxiter=100, maxeps=1000)
+    q, pi, _ = qlearning(model, alpha=0.8, epsilon=0.1, maxiter=100, maxeps=1000)
 
     # test value iteration outputs
     assert np.all(q == test_q)

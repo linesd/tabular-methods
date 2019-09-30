@@ -31,7 +31,7 @@ def test_sarsa():
     model = gw.create_gridworld()
 
     # solve with sarsa
-    q, pi = sarsa(model, alpha=0.1, epsilon=0.2, maxiter=100, maxeps=1000)
+    q, pi, _ = sarsa(model, alpha=0.1, epsilon=0.2, maxiter=100, maxeps=1000)
 
     # test value iteration outputs
     assert np.all(q == test_q)
