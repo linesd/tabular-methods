@@ -115,6 +115,7 @@ plot_gridworld(model, title="Test world")
 </p>
 
 ### Dynamic programming
+#### Value Iteration & Policy Iteration
 
 Here the created grid world is solved through the use of the dynamic programming method
 value iteration (from `examples/example_value_iteration.py`). See also 
@@ -135,6 +136,7 @@ plot_gridworld(model, value_function=value_function, policy=policy, title="Value
 </p>
 
 ### Temporal Difference
+#### SARSA & Q-Learning
 
 This example describes the code found in `examples/example_sarsa.py` and `examples/example_qlearning.py` 
 which use SARSA and Q-Learning to replicate the solution to the classic **cliff walk** environment on page 108 of 
