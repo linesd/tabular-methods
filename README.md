@@ -14,10 +14,10 @@ algorithms are implemented:
 3. **SARSA, on-policy TD control:** see page 105 of [Reinforcement Learning, An Introduction](http://incompleteideas.net/book/bookdraft2017nov5.pdf)
 4. **Q-Learning off-policy TD control:** see page 107 of [Reinforcement Learning, An Introduction](http://incompleteideas.net/book/bookdraft2017nov5.pdf)
 
-Notes:
+**Notes:**
 - Tested for python >= 3.5
 
-Table of Contents:
+**Table of Contents:**
 1. [Install](#install)
 2. [Examples](#examples)
     1. [Create Grid World](#create-grid-world)
