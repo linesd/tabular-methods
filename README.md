@@ -13,7 +13,8 @@ Table of Contents:
 1. [Install](#install)
 2. [Examples](#examples)
     1. [Create Grid World](#create-grid-world)
-    2. [Dynamic Programming](#dynamic-programming)
+    2. [Dynamic Programming (value iteration & policy iteration)](#dynamic-programming)
+    3. [Temporal Difference (SARSA and Q-Learning)](#temporal-difference)
 
 ## Install
 ```
@@ -130,4 +131,64 @@ plot_gridworld(model, value_function=value_function, policy=policy, title="Value
 ```
 <p align="center">
   <img src="doc/imgs/value_iteration.png" width=500>
+</p>
+
+### Temporal Difference
+
+This example describes the code found in `examples/example_sarsa.py` and `examples/example_qlearning.py` 
+which use SARSA and Q-Learning to replicate the solution to the classic **cliff walk** environment on page 108 of 
+[Sutton's book](http://incompleteideas.net/book/bookdraft2017nov5.pdf). 
+
+The cliff walk environment is created with the code:
+```
+# specify world parameters
+num_rows = 4
+num_cols = 12
+restart_states = np.array([[3,1],[3,2],[3,3],[3,4],[3,5],
+                           [3,6],[3,7],[3,8],[3,9],[3,10]])
+start_state = np.array([[3,0]])
+goal_states = np.array([[3,11]])
+
+# create model
+gw = GridWorld(num_rows=num_rows,
+               num_cols=num_cols,
+               start_state=start_state,
+               goal_states=goal_states)
+gw.add_obstructions(restart_states=restart_states)
+gw.add_rewards(step_reward=-1,
+               goal_reward=10,
+               restart_state_reward=-100)
+gw.add_transition_probability(p_good_transition=1,
+                              bias=0)
+gw.add_discount(discount=0.9)
+model = gw.create_gridworld()
+```
+
+Solve the cliff walk with the on-policy temporal difference control method **SARSA** and plot the results. 
+SARSA returns three values, the q_function, the policy and the state_counts. Here the policy and the 
+state_counts are passed to `plot_gridworld` so that the path most frequently used by the agent is show. 
+However, the q_function can be passed instead to show the q_function values on the plot.  
+
+```
+# solve with SARSA
+q_function, pi, state_counts = sarsa(model, alpha=0.1, epsilon=0.2, maxiter=100, maxeps=100000)
+
+# plot the results
+plot_gridworld(model, policy=pi, state_counts=state_counts, title="SARSA")
+```
+<p align="center">
+  <img src="doc/imgs/sarsa_cliffworld.png" width=500>
+</p>
+
+Solve the cliff walk with the off-policy temporal difference control method **Q-Learning** and plot the results.
+
+```
+# solve with Q-Learning
+ql_q_function, ql_pi, ql_state_counts = qlearning(model, alpha=0.9, epsilon=0.2, maxiter=100, maxeps=10000)
+
+# plot the results
+plot_gridworld(model, policy=pi, state_counts=state_counts, title="Q-Learning", path=path)
+```
+<p align="center">
+  <img src="doc/imgs/qlearning_cliffworld.png" width=500>
 </p>
