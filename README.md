@@ -218,7 +218,7 @@ path along the cliff edge.
 ## Testing
 
 Testing setup with [pytest](https://docs.pytest.org) (requires installation). Should you want to check version 
-compatibility or make changes, you can check that original SSGPR functionality remains unaffected by executing 
-`pytest -v` in the **test** directory. You should see the following:
+compatibility or make changes, you can check that original tabular-methods functionality remains unaffected by 
+executing `pytest -v` in the **test** directory. You should see the following:
 
 ![pytest_results](doc/imgs/pytest_results.png)
