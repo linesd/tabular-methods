@@ -28,7 +28,7 @@ algorithms are implemented:
 ## Install
 ```
 # clone repo
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Examples
